@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+            color: white;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #balance {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+        }
+        .coin-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .coin-container:active {
+            transform: scale(0.95);
+        }
+        #coin {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffcc00, #b8860b);
+            box-shadow: 0 0 50px rgba(255, 204, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 10px solid #555;
+        }
+        .stats {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="balance">0</div>
+    
+    <div class="coin-container" onclick="tap(event)">
+        <div id="coin">🐹</div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">⚡ 1000/1000</div>
+        <div class="stat-card">🚀 Boost</div>
+    </div>
+
+    <script>
+        let count = 0;
+        const balanceEl = document.getElementById('balance');
+
+        function tap(event) {
+            count++;
+            balanceEl.innerText = count.toLocaleString();
+            
+            // Vibratsiya (Faqat telefonda)
+            Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+        }
+
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand(); // Ekran tepadagi burchakka qadar ochiladi
+    </script>
+</body>
+</html>
